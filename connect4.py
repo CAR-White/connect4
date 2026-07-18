@@ -1,3 +1,4 @@
+import os
 board = [[" "],[" "],[" "],[" "],[" "],[" "],[" "],
          [" "],[" "],[" "],[" "],[" "],[" "],[" "],
          [" "],[" "],[" "],[" "],[" "],[" "],[" "],
@@ -5,8 +6,11 @@ board = [[" "],[" "],[" "],[" "],[" "],[" "],[" "],
          [" "],[" "],[" "],[" "],[" "],[" "],[" "],
          [" "],[" "],[" "],[" "],[" "],[" "],[" "]
 ]
-counter1 = "r"
-counter2 = "y"
+
+c1 = "\033[31mO\033[m"
+c2 = "\033[33mO\033[m"
+#c1 = "r"
+#c2 = "y"
 
 
 
@@ -35,7 +39,7 @@ def addplay1():
    
    for i in range(row,-1,-7):
         if board[i] == [" "]:
-            board[i] = ["r"]
+            board[i] = [c1]
             break
         pass
    #return board 
@@ -47,7 +51,7 @@ def addplay2():
    
    for i in range(row,0,-7):
         if board[i] == [" "]:
-            board[i] = ["y"]
+            board[i] = [c2]
             break
         pass
    #return board 
@@ -116,22 +120,24 @@ def draw():
           
 def main():
     gamestate = True
+    board_appear2()
+
 
     while gamestate:
         addplay1()
-        if row_check(["r"]) == True:
+        if row_check([c1]) == True:
             gamestate = False
             print("player 1 wins")
             break
-        elif col_check(["r"]) == True:
+        elif col_check([c1]) == True:
             gamestate = False
             print("player 1 wins")
             break
-        elif diag_check1(["r"]) == True:
+        elif diag_check1([c1]) == True:
             gamestate = False
             print("player 1 wins")
             break
-        elif diag_check2(["r"]) == True:
+        elif diag_check2([c1]) == True:
             gamestate = False
             break
         elif draw() == True:
@@ -140,23 +146,23 @@ def main():
             break
 
         else:
-            print(board_appear2())
+            (board_appear2())
             
         
         addplay2()
-        if row_check(["y"]) == True:
+        if row_check([c2]) == True:
             gamestate = False
             print("player 2 wins")
             break
-        elif col_check(["y"]) == True:
+        elif col_check([c2]) == True:
             gamestate = False
             print("player 1 wins")
             break
-        elif diag_check1(["y"]) == True:
+        elif diag_check1([c2]) == True:
             gamestate = False
             print("player 2 wins")
             break
-        elif diag_check2(["y"]) == True:
+        elif diag_check2([c2]) == True:
             gamestate = False
             print("player 2 wins")
             break
@@ -166,10 +172,11 @@ def main():
             break
 
         else:
-         print(board_appear2())
+         (board_appear2())
 
-    print(board_appear2())
-    return "game over"
+    (board_appear2())
+    return("game over")
+    
 
 
 def board_appear():
@@ -180,6 +187,7 @@ def board_appear():
     
 
 def board_appear2():
+    os.system('cls' if os.name == 'nt' else 'clear')
     i = 0
     k=0
     while i < 42:
@@ -206,12 +214,10 @@ def board_appear2():
         k+=7
         
 
-
-
 print(main())
+
+
 
 
    
 
-
-#board[i].append(counter2)
